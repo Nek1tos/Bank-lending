@@ -34,6 +34,7 @@
     <a href="/" class="logo">🟢 УкрБанк</a>
     <div>
         <a href="/loans">Кредити</a>
+        <a href="/admin/loans">Адмін</a>
         <a href="/about">Про проєкт</a>
     </div>
 </nav>
@@ -41,7 +42,10 @@
 <div class="hero">
     <h1>Кредити для вас</h1>
     <p>Оформте кредит онлайн — швидко і без зайвих документів</p>
-    <a href="/loans">Обрати кредит</a>
+    <div class="hero-buttons">
+        <a href="/loans">Обрати кредит</a>
+        <a href="/admin/loans">Адмін</a>
+    </div>
 </div>
 
 <div class="cards">

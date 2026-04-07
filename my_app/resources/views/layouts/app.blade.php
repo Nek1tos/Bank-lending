@@ -23,6 +23,7 @@
                 <li class="nav-item"><a class="nav-link" href="{{ route('main') }}">Головна</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('loans.index') }}">Кредити</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ route('about') }}">Про проєкт</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('admin.loans.index') }}">Адмін</a></li>
             </ul>
         </div>
     </div>
