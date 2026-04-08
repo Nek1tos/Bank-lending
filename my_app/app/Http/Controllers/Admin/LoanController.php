@@ -23,9 +23,9 @@ class LoanController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'rate' => 'required|string|max:50',
-            'term' => 'required|string|max:50',
-            'amount' => 'required|string|max:100',
+            'rate' => 'required|numeric|min:0',
+            'term' => 'required|integer|min:1',
+            'amount' => 'required|numeric|min:1',
         ]);
 
         $data['user_id'] = 1;

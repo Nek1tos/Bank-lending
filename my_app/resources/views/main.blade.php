@@ -33,6 +33,7 @@
 <nav>
     <a href="/" class="logo">🟢 УкрБанк</a>
     <div>
+        <a href="/">Головна</a>
         <a href="/loans">Кредити</a>
         <a href="/admin/loans">Адмін</a>
         <a href="/about">Про проєкт</a>

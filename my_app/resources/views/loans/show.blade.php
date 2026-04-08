@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>{{ $loan['name'] }}</title>
+    <title>{{ $loan->name }}</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: Arial, sans-serif; background: #f4f4f4; color: #333; }
@@ -48,6 +48,7 @@
     <div>
         <a href="/">Головна</a>
         <a href="/loans">Кредити</a>
+        <a href="/admin/loans">Адмін</a>
         <a href="/about">Про проєкт</a>
     </div>
 </nav>
@@ -57,11 +58,28 @@
 
     <div class="row">
         <div class="info">
-            <h2>{{ $loan['name'] }}</h2>
+            @php
+        $rateValue = trim(preg_replace('/[^0-9.,]/u', '', $loan->rate));
+        $rateValueNumeric = str_replace(',', '.', $rateValue);
+        $rateText = is_numeric($rateValueNumeric)
+            ? ((floor((float)$rateValueNumeric) == (float)$rateValueNumeric)
+                ? number_format((float)$rateValueNumeric, 0, ',', ' ')
+                : number_format((float)$rateValueNumeric, 2, ',', ' ')
+              ) . '%'
+            : $loan->rate;
+
+        $termValue = trim(preg_replace('/[^0-9]/u', '', $loan->term));
+        $termText = is_numeric($termValue) ? $termValue . ' міс' : $loan->term;
+
+        $amountValue = trim(preg_replace('/[^0-9.,]/u', '', $loan->amount));
+        $amountText = is_numeric(str_replace(',', '.', $amountValue)) ? number_format((float) str_replace(',', '.', $amountValue), 0, ',', ' ') . ' грн' : $loan->amount;
+    @endphp
+
+    <h2>{{ $loan->name }}</h2>
             <table>
-                <tr><td>Максимальна сума</td><td>{{ $loan['amount'] }}</td></tr>
-                <tr><td>Процентна ставка</td><td>{{ $loan['rate'] }} річних</td></tr>
-                <tr><td>Термін</td><td>{{ $loan['term'] }}</td></tr>
+                <tr><td>Максимальна сума</td><td>{{ $amountText }}</td></tr>
+                <tr><td>Процентна ставка</td><td>{{ $rateText }} річних</td></tr>
+                <tr><td>Термін</td><td>{{ $termText }}</td></tr>
                 <tr><td>Рішення</td><td>30 хвилин</td></tr>
                 <tr><td>Дострокове погашення</td><td>Без штрафів</td></tr>
             </table>
@@ -90,7 +108,7 @@
 function calculate() {
     var amount = parseFloat(document.getElementById('amount').value);
     var months = parseInt(document.getElementById('months').value);
-    var rate = {{ (float) str_replace('%', '', $loan['rate']) }} / 100 / 12;
+    var rate = {{ (float) preg_replace('/[^0-9.]/', '', $loan->rate) }} / 100 / 12;
 
     if (!amount || !months) {
         alert('Заповніть всі поля!');

@@ -31,23 +31,44 @@
     <a href="/" class="logo">🟢 УкрБанк</a>
     <div>
         <a href="/">Головна</a>
+        <a href="/loans">Кредити</a>
+        <a href="/admin/loans">Адмін</a>
         <a href="/about">Про проєкт</a>
     </div>
 </nav>
 
 <h1>Кредитні програми</h1>
 
-@php $icons = ['🛒', '🏠', '🚗', '💼']; @endphp
+@php
+    $icons = ['🛒', '🏠', '🚗', '💼'];
+@endphp
 
 <div class="cards">
     @foreach($loans as $i => $loan)
-    <div class="card">
-        <h3>{{ $icons[$i] }} {{ $loan['name'] }}</h3>
-        <p>Ставка: <b>{{ $loan['rate'] }}</b></p>
-        <p>Термін: <b>{{ $loan['term'] }}</b></p>
-        <p>Сума: <b>{{ $loan['amount'] }}</b></p>
-        <a href="/loans/{{ $loan['id'] }}">Детальніше →</a>
-    </div>
+        @php
+            $rateValue = trim(preg_replace('/[^0-9.,]/u', '', $loan->rate));
+            $rateValueNumeric = str_replace(',', '.', $rateValue);
+            $rateText = is_numeric($rateValueNumeric)
+                ? ((floor((float)$rateValueNumeric) == (float)$rateValueNumeric)
+                    ? number_format((float)$rateValueNumeric, 0, ',', ' ')
+                    : number_format((float)$rateValueNumeric, 2, ',', ' ')
+                  ) . '%'
+                : $loan->rate;
+
+            $termValue = trim(preg_replace('/[^0-9]/u', '', $loan->term));
+            $termText = is_numeric($termValue) ? $termValue . ' міс' : $loan->term;
+
+            $amountValue = trim(preg_replace('/[^0-9.,]/u', '', $loan->amount));
+            $amountText = is_numeric(str_replace(',', '.', $amountValue)) ? number_format((float) str_replace(',', '.', $amountValue), 0, ',', ' ') . ' грн' : $loan->amount;
+        @endphp
+
+        <div class="card">
+            <h3>{{ $icons[$i % count($icons)] }} {{ $loan->name }}</h3>
+            <p>Ставка: <b>{{ $rateText }}</b></p>
+            <p>Термін: <b>{{ $termText }}</b></p>
+            <p>Сума: <b>{{ $amountText }}</b></p>
+            <a href="/loans/{{ $loan->id }}">Детальніше →</a>
+        </div>
     @endforeach
 </div>
 
