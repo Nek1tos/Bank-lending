@@ -29,7 +29,9 @@
     <div>
         <a href="/">Головна</a>
         <a href="/loans">Кредити</a>
-        <a href="/admin/loans">Адмін</a>
+        @auth
+            <a href="{{ route('admin.loans.index') }}">Адмін</a>
+        @endauth
         <a href="/about">Про проєкт</a>
     </div>
 </nav>

@@ -35,7 +35,9 @@
     <div>
         <a href="/">Головна</a>
         <a href="/loans">Кредити</a>
-        <a href="/admin/loans">Адмін</a>
+        @auth
+            <a href="{{ route('admin.loans.index') }}">Адмін</a>
+        @endauth
         <a href="/about">Про проєкт</a>
     </div>
 </nav>
@@ -45,7 +47,9 @@
     <p>Оформте кредит онлайн — швидко і без зайвих документів</p>
     <div class="hero-buttons">
         <a href="/loans">Обрати кредит</a>
-        <a href="/admin/loans">Адмін</a>
+        @auth
+            <a href="{{ route('admin.loans.index') }}">Адмін</a>
+        @endauth
     </div>
 </div>
 

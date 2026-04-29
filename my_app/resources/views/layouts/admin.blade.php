@@ -11,6 +11,9 @@
         nav .logo { color: white; font-size: 20px; font-weight: bold; text-decoration: none; }
         nav a { color: white; text-decoration: none; margin-left: 20px; font-size: 14px; }
         nav a:hover { text-decoration: underline; }
+        nav .auth { display: flex; align-items: center; gap: 12px; }
+        nav .auth span { color: white; font-size: 14px; }
+        nav .auth button { background: transparent; border: 1px solid white; color: white; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 14px; }
 
         .hero { background: white; padding: 40px 25px; text-align: center; border-bottom: 3px solid #009245; }
         .hero h1 { font-size: 28px; color: #009245; margin-bottom: 10px; }
@@ -44,8 +47,21 @@
     <div>
         <a href="/">Головна</a>
         <a href="/loans">Кредити</a>
-        <a href="/admin/loans">Адмін</a>
+        @auth
+            <a href="{{ route('admin.loans.index') }}">Адмін</a>
+        @endauth
         <a href="/about">Про проєкт</a>
+    </div>
+    <div class="auth">
+        @auth
+            <span>Вітаємо, {{ Auth::user()->name }}</span>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit">Вийти</button>
+            </form>
+        @else
+            <a href="{{ route('login') }}">Увійти</a>
+        @endauth
     </div>
 </nav>
 
