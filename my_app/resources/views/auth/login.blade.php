@@ -2,46 +2,58 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
+    <div style="text-align: center; margin-bottom: 20px;">
+        <h2 style="color: #009245; font-size: 24px; margin-bottom: 5px;">Увійти до аккаунту</h2>
+        <p style="color: #666; font-size: 14px;">УкрБанк - видача кредитів онлайн</p>
+    </div>
+
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
         <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div style="margin-bottom: 16px;">
+            <label style="display: block; font-weight: 600; color: #333; margin-bottom: 6px;">Email</label>
+            <input type="email" name="email" value="{{ old('email') }}" required autofocus style="width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;" />
+            @error('email')
+                <p style="color: #dc3545; font-size: 13px; margin-top: 4px;">{{ $message }}</p>
+            @enderror
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <div style="margin-bottom: 16px;">
+            <label style="display: block; font-weight: 600; color: #333; margin-bottom: 6px;">Пароль</label>
+            <input type="password" name="password" required style="width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;" />
+            @error('password')
+                <p style="color: #dc3545; font-size: 13px; margin-top: 4px;">{{ $message }}</p>
+            @enderror
         </div>
 
         <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
+        <div style="display: flex; align-items: center; margin-bottom: 16px;">
+            <input type="checkbox" id="remember" name="remember" style="width: 16px; height: 16px; margin-right: 8px;">
+            <label for="remember" style="font-size: 14px; color: #666;">Запам'ятати мене</label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
+        <!-- Buttons -->
+        <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+            <button type="submit" style="flex: 1; background: #009245; color: white; padding: 10px; border: none; border-radius: 4px; font-size: 15px; font-weight: 600; cursor: pointer;">
+                Увійти
+            </button>
+        </div>
+
+        @if (Route::has('password.request'))
+            <div style="text-align: center;">
+                <a href="{{ route('password.request') }}" style="color: #009245; text-decoration: none; font-size: 14px;">
+                    Забули пароль?
                 </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
+            </div>
+        @endif
     </form>
+
+    <div style="text-align: center; margin-top: 20px; padding-top: 20px; border-top: 1px solid #ddd;">
+        <p style="color: #666; margin-bottom: 10px; font-size: 14px;">Немаєте облікового запису?</p>
+        <a href="{{ route('register') }}" style="display: inline-block; background: #009245; color: white; padding: 10px 28px; border-radius: 4px; text-decoration: none; font-size: 14px; font-weight: 600;">
+            Створити аккаунт
+        </a>
+    </div>
 </x-guest-layout>
