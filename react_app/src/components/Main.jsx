@@ -1,3 +1,6 @@
+import { loans } from '../data/loans';
+import LoanCard from './LoanCard';
+
 export default function Main({ page, onNavigate }) {
   return (
     <main className="main">
@@ -30,19 +33,17 @@ export default function Main({ page, onNavigate }) {
       {page === 'catalog' && (
         <section className="catalog-page">
           <h1>Каталог кредитів</h1>
-          <div className="loan-card-list">
-            <div className="loan-card">
-              <h3>Споживчий кредит</h3>
-              <p>Ставка 15%, термін 12 міс</p>
-            </div>
-            <div className="loan-card">
-              <h3>Іпотека</h3>
-              <p>Ставка 10%, термін 240 міс</p>
-            </div>
-            <div className="loan-card">
-              <h3>Автокредит</h3>
-              <p>Ставка 12%, термін 60 міс</p>
-            </div>
+          <div className="cards-grid">
+            {loans.map(loan => (
+              <LoanCard
+                key={loan.id}
+                name={loan.name}
+                rate={loan.rate}
+                term={loan.term}
+                amount={loan.amount}
+                icon={loan.icon}
+              />
+            ))}
           </div>
         </section>
       )}

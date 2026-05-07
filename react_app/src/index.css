@@ -120,3 +120,59 @@ body { font-family: Arial, sans-serif; background: #f4f4f4; color: #333; }
   color: #444;
   margin-bottom: 1rem;
 }
+
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  border-top: 3px solid #009245;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  width: 260px;
+}
+
+.card .icon {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  color: #009245;
+  margin-bottom: 8px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.card button {
+  background: #009245;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+.card button:hover {
+  background: #007a38;
+}
+
+.card .counter {
+  color: #009245;
+  font-weight: bold;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.cards-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 30px 20px;
+}
