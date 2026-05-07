@@ -1,7 +1,8 @@
-import { loans } from '../data/loans';
-import LoanCard from './LoanCard';
+import { loans } from '../data/loans'
+import LoanCard from './LoanCard'
+import PromoBanner from './PromoBanner'
 
-export default function Main({ page, onNavigate }) {
+export default function Main({ page, onNavigate, totalApplied, onApply }) {
   return (
     <main className="main">
       {page === 'home' && (
@@ -33,8 +34,10 @@ export default function Main({ page, onNavigate }) {
       {page === 'catalog' && (
         <section className="catalog-page">
           <h1>Каталог кредитів</h1>
+          <div className="applications-summary">Заявок всього: {totalApplied}</div>
+          <PromoBanner />
           <div className="cards-grid">
-            {loans.map(loan => (
+            {loans.map((loan) => (
               <LoanCard
                 key={loan.id}
                 name={loan.name}
@@ -42,6 +45,7 @@ export default function Main({ page, onNavigate }) {
                 term={loan.term}
                 amount={loan.amount}
                 icon={loan.icon}
+                onApply={onApply}
               />
             ))}
           </div>
