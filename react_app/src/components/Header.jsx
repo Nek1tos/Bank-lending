@@ -19,6 +19,11 @@ export default function Header({ totalApplied }) {
               Про нас
             </Link>
           </li>
+          <li>
+            <Link to="/contacts" className="nav-link">
+              Контакти
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>

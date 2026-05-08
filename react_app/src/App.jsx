@@ -7,6 +7,7 @@ import HomePage from './pages/HomePage'
 import CatalogPage from './pages/CatalogPage'
 import LoanDetailsPage from './pages/LoanDetailsPage'
 import AboutPage from './pages/AboutPage'
+import ContactPage from './pages/ContactPage'
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -46,6 +47,7 @@ export default function App() {
         />
         <Route path="/loans/:id" element={<LoanDetailsPage onApply={() => setTotalApplied((prev) => prev + 1)} />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/contacts" element={<ContactPage />} />
         <Route
           path="*"
           element={
