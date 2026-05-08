@@ -11,12 +11,14 @@ body { font-family: Arial, sans-serif; background: #f4f4f4; color: #333; }
 }
 
 .logo,
-.nav-links button {
+.nav-links button,
+.nav-link {
   background: none;
   border: none;
   color: white;
   cursor: pointer;
   font: inherit;
+  text-decoration: none;
 }
 
 .logo {
@@ -30,7 +32,8 @@ body { font-family: Arial, sans-serif; background: #f4f4f4; color: #333; }
   gap: 1rem;
 }
 
-.nav-links button:hover {
+.nav-links button:hover,
+.nav-link:hover {
   opacity: 0.8;
 }
 
@@ -209,4 +212,41 @@ body { font-family: Arial, sans-serif; background: #f4f4f4; color: #333; }
   gap: 20px;
   justify-content: center;
   padding: 30px 20px;
+}
+
+.card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.details-link {
+  color: #009245;
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.details-link:hover {
+  opacity: 0.8;
+}
+
+.back-link {
+  display: block;
+  margin-top: 16px;
+  color: #009245;
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+
+.back-link:hover {
+  opacity: 0.8;
+}
+
+.success-message {
+  margin-top: 12px;
+  color: #007a38;
+  font-weight: 700;
 }

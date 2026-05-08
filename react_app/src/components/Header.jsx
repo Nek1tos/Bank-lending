@@ -1,21 +1,23 @@
-export default function Header({ currentPage, onNavigate, totalApplied }) {
+import { Link } from 'react-router-dom'
+
+export default function Header({ totalApplied }) {
   return (
     <nav className="navbar">
-      <button type="button" className="logo" onClick={() => onNavigate('home')}>
+      <Link to="/" className="logo">
         🟢 УкрБанк
-      </button>
+      </Link>
       <div className="nav-right">
         <div className="applications-badge">Заявок: {totalApplied}</div>
         <ul className="nav-links">
           <li>
-            <button type="button" className={currentPage === 'catalog' ? 'active' : ''} onClick={() => onNavigate('catalog')}>
+            <Link to="/catalog" className="nav-link">
               Каталог
-            </button>
+            </Link>
           </li>
           <li>
-            <button type="button" className={currentPage === 'about' ? 'active' : ''} onClick={() => onNavigate('about')}>
+            <Link to="/about" className="nav-link">
               Про нас
-            </button>
+            </Link>
           </li>
         </ul>
       </div>
