@@ -320,3 +320,32 @@ body { font-family: Arial, sans-serif; background: #f4f4f4; color: #333; }
   font-size: 26px;
   margin-bottom: 12px;
 }
+
+/* Filter buttons styles */
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.filter-buttons button {
+  padding: 8px 20px;
+  border: 2px solid #009245;
+  background: white;
+  color: #009245;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.filter-buttons button:hover {
+  background: #e8f5e9;
+}
+
+.filter-buttons button.active {
+  background: #009245;
+  color: white;
+}

@@ -1,11 +1,24 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { loans } from '../data/loans'
+import api from '../api/axiosConfig'
+import Spinner from '../components/Spinner'
 
 export default function LoanDetailsPage({ onApply }) {
   const { id } = useParams()
   const [submitted, setSubmitted] = useState(false)
-  const loan = loans.find(l => l.id === Number(id))
+  const [loan, setLoan] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
+  useEffect(() => {
+    api.get(`/loans/${id}`)
+      .then(res => {
+        setLoan(res.data)
+        setError(null)
+      })
+      .catch(() => setError('Кредит не знайдено'))
+      .finally(() => setLoading(false))
+  }, [id])
 
   const handleSubmit = () => {
     if (onApply) {
@@ -13,6 +26,18 @@ export default function LoanDetailsPage({ onApply }) {
     }
     setSubmitted(true)
     window.setTimeout(() => setSubmitted(false), 2000)
+  }
+
+  if (loading) return <Spinner />
+  if (error) {
+    return (
+      <main className="main">
+        <section style={{ textAlign: 'center', padding: '40px' }}>
+          <p style={{color:'red'}}>{error}</p>
+          <Link to="/catalog" className="back-link">← Назад до каталогу</Link>
+        </section>
+      </main>
+    )
   }
 
   if (!loan) {
@@ -48,7 +73,7 @@ export default function LoanDetailsPage({ onApply }) {
             <strong>Термін:</strong> {loan.term} місяців
           </p>
           <p>
-            <strong>Сума:</strong> {loan.amount.toLocaleString('uk-UA')} грн
+            <strong>Сума:</strong> {Number(loan.amount).toLocaleString('uk-UA')} грн
           </p>
           <button className="btn" onClick={handleSubmit} style={{ marginTop: '20px', marginBottom: '16px' }}>
             Подати заявку
